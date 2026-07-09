@@ -81,28 +81,6 @@ penyimpanan file terjadi 100% di komputermu sendiri.
 - 🍪 **Dukungan `cookies.txt`** — untuk video yang butuh login/dibatasi umur.
 - 🎨 **UI liquid glass** — tema kaca modern ala iOS, ringan dan responsif.
 
-## Arsitektur
-
-```
-┌─────────────────────────┐        HTTP (localhost)        ┌──────────────────────────┐
-│   Chrome Extension       │ ──────────────────────────────▶│   Backend Server          │
-│   (popup.html/css/js)    │ ◀──────────────────────────────│   Flask · 127.0.0.1:8766  │
-│                          │      job status / progress      │                          │
-│  • Kirim URL             │                                 │  • yt-dlp (ekstraksi)     │
-│  • Tampilkan progres     │                                 │  • FFmpeg (encode MP3)    │
-│  • Kelola pengaturan     │                                 │  • Deteksi duplikat       │
-└─────────────────────────┘                                 │  • Kelola job & queue     │
-                                                              └──────────────────────────┘
-                                                                          │
-                                                                          ▼
-                                                              📁 Folder musik di komputermu
-```
-
-Browser extension **tidak bisa** menjalankan proses seperti FFmpeg/yt-dlp atau
-menulis file langsung ke sistem — ini batasan keamanan bawaan semua browser,
-bukan cuma Chrome. Karena itu logika unduh dijalankan oleh backend Python
-lokal, sementara extension hanya bertugas sebagai antarmuka.
-
 ## Prasyarat
 
 > [!NOTE]
@@ -257,30 +235,6 @@ lengkap di `backend/server.log`.
 
 Untuk menonaktifkan: jalankan `uninstall_autostart.bat` (Windows) atau
 `./uninstall_autostart_mac.sh` (macOS).
-
-## Struktur Proyek
-
-```
-.
-├── backend/
-│   ├── server.py                  # REST API lokal (Flask)
-│   ├── downloader_core.py         # Logika inti: yt-dlp + FFmpeg + deteksi duplikat
-│   ├── requirements.txt
-│   ├── _bootstrap_windows.bat     # Auto-install Python & FFmpeg (Windows)
-│   ├── _bootstrap_mac.sh          # Auto-install Python & FFmpeg (macOS)
-│   ├── start.bat / start.sh       # Entry point utama
-│   ├── start_silent.bat / start_silent_mac.sh   # Dipakai oleh auto-start
-│   ├── install_autostart.bat / .sh
-│   ├── uninstall_autostart.bat / .sh
-│   ├── run_hidden.vbs             # Peluncur tanpa jendela CMD (Windows)
-│   ├── com.samxode.ytmp3downloader.backend.plist.template  # LaunchAgent (macOS)
-│   └── config.json                # Dibuat otomatis (pengaturan tersimpan)
-└── extension/
-    ├── manifest.json              # Manifest V3
-    ├── popup.html / popup.css / popup.js
-    ├── background.js
-    └── icons/
-```
 
 ## Referensi API Backend
 
