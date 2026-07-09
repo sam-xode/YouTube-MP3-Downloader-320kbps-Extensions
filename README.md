@@ -1,11 +1,8 @@
-# YouTube-MP3-Downloader-320kbps-Extensions
-Chrome extension for DJs to download high-quality songs without the hassle.
-
 <div align="center">
 
 # 🎧 YouTube MP3 Downloader — Glass
 
-**Chrome extension + local backend untuk mengunduh audio YouTube (single video, banyak video, atau playlist penuh) ke MP3 320kbps CBR — dengan tampilan liquid glass modern.**
+**Chrome extension + local backend untuk mengunduh audio YouTube (single video, banyak video, atau playlist penuh) ke MP3 320kbps CBR — dengan tampilan liquid glass modern.** Chrome extension for DJs to download high-quality songs without the hassle.
 
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-informational)
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Manifest%20V3-yellow?logo=googlechrome&logoColor=white)
